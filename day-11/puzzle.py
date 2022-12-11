@@ -81,12 +81,19 @@ def puzzle_2(input_file_name: str):
             monkey_counts.append(0)
             if not input_file.readline():
                 break
+
+    divisors = [monkey['divisor'] for monkey in monkeys]
+    common_divisor = 1
+    for d in divisors:
+        common_divisor *= d
+
     for round in range(0, 10000):
-        print(round)
+        # print(round)
         for index, monkey in enumerate(monkeys):
             for i in range(0, len(monkey['items'])):
                 item = monkey['items'][i]
                 new_value = eval(monkey['operation'], {'old': item})
+                new_value = new_value % common_divisor
                 if new_value % monkey['divisor'] == 0:
                     # print(f'throwing to {monkey["true"]}')
                     next_monkey = monkey["true"]
