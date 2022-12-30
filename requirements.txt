@@ -1,3 +1,0 @@
-blessed
-z3-solver
-sympy
